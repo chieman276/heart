@@ -59,7 +59,7 @@
             transform-origin: 100% 100%;
         }
 
-        #text {
+        .text_show_hide {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -128,7 +128,7 @@
 <BODY>
     <div class="box">
         <canvas id="pinkboard"></canvas>
-        <div id="text">Tannie</div>
+        <div id="text_hide_show" class="text_show_hide">Tannie</div>
     </div>
     <script>
         var settings = {
@@ -283,7 +283,9 @@
                     context.lineTo(point.x, point.y);
                 }
                 context.closePath();
-                context.fillStyle = '#f50b02';
+                // context.fillStyle = '#f50b02';
+                context.fillStyle = '#0011fb';
+                // context.fillStyle = '#ffffff';
                 context.fill();
                 var image = new Image();
                 image.src = canvas.toDataURL();
@@ -319,6 +321,19 @@
                 render();
             }, 10);
         })(document.getElementById('pinkboard'));
+        var startTime = new Date().getTime();
+        function checkTime() {
+            var currentTime = new Date().getTime();
+            var elapsedTime = currentTime - startTime;
+            if (elapsedTime >= 3000) {
+                document.getElementById('text_hide_show').style.display = 'none';
+            } else {
+                requestAnimationFrame(checkTime);
+            }
+        }
+
+        checkTime();
+
     </script>
 </BODY>
 
